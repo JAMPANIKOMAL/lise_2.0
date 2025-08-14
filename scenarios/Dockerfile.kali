@@ -3,6 +3,7 @@ FROM kalilinux/kali-rolling
 
 # Avoid interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
+ENV USER=root
 
 # Install a lightweight desktop environment (XFCE), a VNC server, and common tools
 RUN apt-get update && apt-get install -y \
@@ -33,4 +34,4 @@ EXPOSE 5901
 # 1. Clean up old locks.
 # 2. Start VNC server in the BACKGROUND (&).
 # 3. Use 'tail -f /dev/null' as the main process to keep the container running indefinitely.
-CMD ["/bin/bash", "-c", "rm -f /tmp/.X1-lock /tmp/.X11-unix/X1 ; vncserver :1 -geometry 1280x720 -depth 24 -localhost no & tail -f /dev/null"]
+CMD ["/bin/bash", "-c", "rm -f /tmp/.X1-lock /tmp/.X11-unix/X1 ; vncserver :1 -geometry 1280x720 -depth 24 & tail -f /dev/null"]

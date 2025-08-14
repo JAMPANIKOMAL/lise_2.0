@@ -8,7 +8,7 @@ import socket
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QLabel, QLineEdit, QPushButton, QStackedWidget)
 from PyQt6.QtCore import QThread, pyqtSignal
-from vnc_widget import VncWidget
+from simple_vnc_widget import SimpleVncWidget
 
 # --- VNC Connection Thread ---
 # This new thread handles the potentially blocking process of finding the VNC port
@@ -127,7 +127,7 @@ class AgentWindow(QMainWindow):
         login_layout.addWidget(self.connect_button)
         self.stack.addWidget(self.login_widget)
         
-        self.vnc_widget = VncWidget(self)
+        self.vnc_widget = SimpleVncWidget(self)
         self.stack.addWidget(self.vnc_widget)
 
         self.connect_button.clicked.connect(self.connect_to_server)
