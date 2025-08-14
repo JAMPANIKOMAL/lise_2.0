@@ -1,0 +1,36 @@
+# Use the official Kali Linux image as a base
+FROM kalilinux/kali-rolling
+
+# Avoid interactive prompts during installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install a lightweight desktop environment (XFCE), a VNC server, and common tools
+RUN apt-get update && apt-get install -y \
+    kali-desktop-xfce \
+    tightvncserver \
+    net-tools \
+    iproute2 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Set up the VNC server
+RUN mkdir -p /root/.vnc
+# Set the VNC password to "lise"
+RUN echo "lise" | vncpasswd -f > /root/.vnc/passwd
+RUN chmod 600 /root/.vnc/passwd
+
+# --- FIX 1: Create the xstartup file to launch the XFCE desktop ---
+# This file tells the VNC server what to run when a client connects.
+RUN echo '#!/bin/sh' > /root/.vnc/xstartup && \
+    echo 'unset SESSION_MANAGER' >> /root/.vnc/xstartup && \
+    echo 'unset DBUS_SESSION_BUS_ADDRESS' >> /root/.vnc/xstartup && \
+    echo 'startxfce4 &' >> /root/.vnc/xstartup && \
+    chmod +x /root/.vnc/xstartup
+
+# Expose the VNC port
+EXPOSE 5901
+
+# --- FIX 2: A robust startup command to keep the container alive ---
+# 1. Clean up old locks.
+# 2. Start VNC server in the BACKGROUND (&).
+# 3. Use 'tail -f /dev/null' as the main process to keep the container running indefinitely.
+CMD ["/bin/bash", "-c", "rm -f /tmp/.X1-lock /tmp/.X11-unix/X1 ; vncserver :1 -geometry 1280x720 -depth 24 -localhost no & tail -f /dev/null"]

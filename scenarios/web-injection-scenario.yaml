@@ -1,16 +1,9 @@
-    name: Web Injection Scenario
-    description: A test scenario for Phase 2 Docker integration with injects.
-    teams:
-      blue:
-        name: Blue Team
-        dockerfile: ./Dockerfile.test
-      red:
-        name: Red Team
-        dockerfile: ./Dockerfile.test
-
-    injects:
-      - team: blue
-        command: "echo 'This is a test for the blue team container'"
-      - team: red
-        command: "ls -la"
-    
+name: Web Injection Scenario
+description: A test scenario for Phase 3 VNC integration.
+teams:
+  blue:
+    name: Blue Team
+    dockerfile: ./Dockerfile.kali
+  red:
+    name: Red Team
+    dockerfile: ./Dockerfile.kali
