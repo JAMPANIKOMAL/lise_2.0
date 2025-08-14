@@ -1,0 +1,5 @@
+# A simple Dockerfile for testing Phase 2 functionality
+FROM alpine:latest
+
+# A command to keep the container running so we can see it.
+CMD ["sh", "-c", "echo 'Test container is running...' && sleep 3600"]
