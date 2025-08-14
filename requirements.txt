@@ -1,0 +1,15 @@
+# For the native desktop user interface
+PyQt6
+
+# For real-time communication between Orchestrator and Agent
+python-socketio
+socketio-client
+
+# For the web server that powers SocketIO
+aiohttp
+
+# For parsing scenario files
+PyYAML
+
+# For interacting with Docker
+docker
