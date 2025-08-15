@@ -13,7 +13,3 @@ PyYAML
 
 # For interacting with Docker
 docker
-
-# For VNC client functionality
-des
-vncdotool

@@ -8,7 +8,6 @@ import socket
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QLabel, QLineEdit, QPushButton, QStackedWidget)
 from PyQt6.QtCore import QThread, pyqtSignal
-from simple_vnc_widget import SimpleVncWidget
 
 # --- VNC Connection Thread ---
 # This new thread handles the potentially blocking process of finding the VNC port
